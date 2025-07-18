@@ -1,0 +1,16 @@
+{
+  // Categories:
+  "carpet.category.extras": "extras",
+  // Rules:
+
+  //scoreboardStats
+  "carpet.rule.scoreboardStats.desc": "Enables scoreboard stats for players.",
+  //addBotsToTeam
+  "carpet.rule.addBotsToTeam.desc": "Adds bot to Bots team.",
+  //botsNoStats
+  "carpet.rule.botsNoStats.desc": "Bots don't sum stats, except if shadow",
+  //tickWarpNoTime
+  "carpet.rule.tickWarpNoTime.desc": "Tick warps with no time argument starts an indefinite time warp .",
+  //removeStatsCommand
+  "carpet.rule.removeStatsCommand.desc": "Adds command to manually remove stats"
+}

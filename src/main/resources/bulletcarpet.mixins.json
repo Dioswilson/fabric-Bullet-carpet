@@ -1,0 +1,19 @@
+{
+  "required": true,
+  "package": "bulletcarpet.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "EntityPlayerMPFakeMixin",
+    "ItemStackMixin",
+    "PlayerEntityMixin",
+    "PlayerManagerMixin",
+    "RegistrySyncManagerMixin",
+    "ScoreboardCriteriaMixin",
+    "ServerPlayerEntityMixin",
+    "ServerStatHandlerMixin",
+    "TickCommandMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
