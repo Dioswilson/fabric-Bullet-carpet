@@ -1,4 +1,4 @@
-package bulletcarpet.helpers;
+package bulletcarpet.utils;
 
 import bulletcarpet.BulletCarpetSettings;
 import net.minecraft.registry.Registries;

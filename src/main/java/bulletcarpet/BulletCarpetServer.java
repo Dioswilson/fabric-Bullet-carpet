@@ -4,7 +4,7 @@ import bulletcarpet.commands.cameramode.CommandGMC;
 import bulletcarpet.commands.cameramode.CommandGMS;
 import bulletcarpet.commands.removeStats.RemoveStatsCommand;
 import bulletcarpet.commands.scoreboardStats.ScoreboardStatsCommand;
-import bulletcarpet.helpers.CustomStats;
+import bulletcarpet.utils.CustomStats;
 import bulletcarpet.helpers.StatsHelper;
 import bulletcarpet.utils.ToolItems;
 import carpet.CarpetExtension;

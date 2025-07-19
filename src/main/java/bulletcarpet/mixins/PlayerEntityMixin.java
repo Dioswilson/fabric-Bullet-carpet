@@ -1,6 +1,6 @@
 package bulletcarpet.mixins;
 
-import bulletcarpet.helpers.CustomStats;
+import bulletcarpet.utils.CustomStats;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.stat.ServerStatHandler;
