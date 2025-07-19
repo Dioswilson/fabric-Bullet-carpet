@@ -37,4 +37,14 @@ public class BulletCarpetSettings {
     )
     public static boolean removeStatsCommand = true;
 
+    @Rule(
+            categories = {COMMAND, BULLET}
+    )
+    public static boolean commandCameramode = true;
+
+    @Rule(
+            categories = {COMMAND, BULLET}
+    )
+    public static boolean cameraModeRestoreLocation = true;
+
 }

@@ -12,5 +12,9 @@
   //tickWarpNoTime
   "carpet.rule.tickWarpNoTime.desc": "Tick warps with no time argument starts an indefinite time warp .",
   //removeStatsCommand
-  "carpet.rule.removeStatsCommand.desc": "Adds command to manually remove stats"
+  "carpet.rule.removeStatsCommand.desc": "Adds command to manually remove stats",
+  //commandCameramode
+  "carpet.rule.commandCameramode.desc": "Enables /c and /s commands to quickly switch between spectator and server modes",
+  //cameraModeRestoreLocation
+  "carpet.rule.cameraModeRestoreLocation.desc": "Places players back to the original location when using camera mode by using /c then /s"
 }
