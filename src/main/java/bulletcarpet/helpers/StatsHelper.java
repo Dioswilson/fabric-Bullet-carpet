@@ -82,7 +82,20 @@ public class StatsHelper {
         }
 
         MinecraftSessionService sessionService = server.getSessionService();
-        GameProfile profile = sessionService.fillProfileProperties(new GameProfile(uuid, null), false);
+        GameProfile profile = null;
+        int attempts = 5;
+        while (profile == null && attempts > 0) {
+            attempts--;
+            try {
+                profile = sessionService.fillProfileProperties(new GameProfile(uuid, null), false);
+            } catch (Exception e) {
+                System.out.println("Retrying to retrieve profile for UUID: " + uuid + " - " + e.getMessage());//Maybe logger
+            }
+        }
+        if (profile == null) {
+            System.out.println("Failed to retrieve profile for UUID: " + uuid);//Maybe logger
+            return null;
+        }
         if (profile.isComplete()) {
             return profile.getName();
         }
