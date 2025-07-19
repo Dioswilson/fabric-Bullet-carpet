@@ -10,6 +10,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import net.minecraft.registry.DefaultedRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.ScoreboardCriterion;
@@ -46,13 +47,18 @@ public class ScoreboardStatsCommand {
             String filteredType = type.toTranslationKey().replace("minecraft.", "");
 
             if (!filteredType.equals("custom")) {
-                for (Identifier itemIdentifier : Registries.ITEM.getIds()) {
-                    String itemName = itemIdentifier.getPath();
-                    commandBuilder.then(literal(filteredType).then(literal(itemName).
-                            executes(c -> executeStats(c, itemIdentifier.getNamespace(), filteredType + ":", itemName, "sidebar")).
+                DefaultedRegistry<?> regitry = Registries.ITEM;
+                if (filteredType.contains("killed")) {
+                    regitry = Registries.ENTITY_TYPE;
+                }
+
+                for (Identifier mobIdentifier : regitry.getIds()) {
+                    String entryName = mobIdentifier.getPath();
+                    commandBuilder.then(literal(filteredType).then(literal(entryName).
+                            executes(c -> executeStats(c, mobIdentifier.getNamespace(), filteredType + ":", entryName, "sidebar")).
                             then(argument("displaySlot", StringArgumentType.word()).
                                     suggests(new ScoreboardSlotSuggestionProvider()).
-                                    executes(c -> executeStats(c, itemIdentifier.getNamespace(), filteredType + ":", itemName, StringArgumentType.getString(c, "displaySlot")))))
+                                    executes(c -> executeStats(c, mobIdentifier.getNamespace(), filteredType + ":", entryName, StringArgumentType.getString(c, "displaySlot")))))
                     );
                 }
             }
@@ -111,8 +117,8 @@ public class ScoreboardStatsCommand {
 
 
     //Todo: Don't like two almost identical functions
-    private static int executeStats(CommandContext<ServerCommandSource> c, String namespace, String prefix, String itemName, String displaySlot) throws CommandSyntaxException {
-        createAndShowObjective(c, prefix + namespace + "." + itemName, displaySlot);
+    private static int executeStats(CommandContext<ServerCommandSource> c, String namespace, String prefix, String entryName, String displaySlot) throws CommandSyntaxException {
+        createAndShowObjective(c, prefix + namespace + "." + entryName, displaySlot);
         return notifyModification(c, displaySlot);
     }
 
