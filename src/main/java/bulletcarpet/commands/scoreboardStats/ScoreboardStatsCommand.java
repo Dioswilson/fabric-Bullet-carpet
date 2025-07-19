@@ -1,8 +1,8 @@
 package bulletcarpet.commands.scoreboardStats;
 
 import bulletcarpet.BulletCarpetSettings;
-import bulletcarpet.helpers.suggestionProviders.ScoreboardSlotSuggestionProvider;
 import bulletcarpet.helpers.StatsHelper;
+import bulletcarpet.helpers.suggestionProviders.ScoreboardSlotSuggestionProvider;
 import bulletcarpet.mixins.ScoreboardCriteriaMixin;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
@@ -67,6 +67,8 @@ public class ScoreboardStatsCommand {
         customCriterias.remove("food");
         customCriterias.remove("health"); //Maybe dejo health?
         customCriterias.remove("trigger");
+        customCriterias.remove("xp");
+        customCriterias.remove("level");
 
 
         for (String key : customCriterias) {
