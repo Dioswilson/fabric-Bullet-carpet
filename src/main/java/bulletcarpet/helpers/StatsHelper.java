@@ -175,7 +175,8 @@ public class StatsHelper {
             if (username != null) {
                 ServerPlayerEntity player = new ServerPlayerEntity(server, Objects.requireNonNull(server.getWorld(World.OVERWORLD)), new GameProfile(uuid, username));
 
-                ServerStatHandler serverStatHandler = (ServerStatHandler) statHandler;
+                //Sounds stupid ignoring statHandler, but don't know how else to fix it
+                ServerStatHandler serverStatHandler = player.getStatHandler();
 
                 for (StatType<Item> statType : statTypes) {
                     int allToolsValue = 0;
@@ -205,7 +206,8 @@ public class StatsHelper {
             String username = getUsername(server, uuid);
             if (username != null) {
                 ServerPlayerEntity player = new ServerPlayerEntity(server, Objects.requireNonNull(server.getWorld(World.OVERWORLD)), new GameProfile(uuid, username));
-                ServerStatHandler serverStatHandler = (ServerStatHandler) statHandler;
+                //Sounds stupid ignoring statHandler, but don't know how else to fix it
+                ServerStatHandler serverStatHandler = player.getStatHandler();
 
                 int timePlayed = serverStatHandler.getStat(Stats.CUSTOM.getOrCreateStat(Stats.PLAY_TIME));
                 serverStatHandler.setStat(player, Stats.CUSTOM.getOrCreateStat(CustomStats.HOURS_PLAYED), timePlayed / 72000);

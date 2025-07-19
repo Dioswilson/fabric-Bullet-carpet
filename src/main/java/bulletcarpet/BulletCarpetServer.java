@@ -12,7 +12,6 @@ import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.command.CommandRegistryAccess;
-import net.minecraft.registry.BuiltinRegistries;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.util.WorldSavePath;
@@ -65,7 +64,6 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
                 } catch (IOException e) {
                     System.err.println("Failed to create file: " + falgFile.getAbsolutePath());
                 }
-                server.stop(false);
             }
         }
     }
