@@ -91,7 +91,7 @@ public class ScoreboardStatsCommand {
                 prefix = "";
             }
 
-            if (!key.contains("teamkill.")) { //Maybe si hay team de bots, añadir excepción
+            if (!key.contains("teamkill.")&&!(key.contains("killedByTeam"))) { //Maybe si hay team de bots, añadir excepción
                 commandBuilder.then(literal(filteredKey).executes(c -> executeSpecialStats(c, prefix, filteredKey, "sidebar")).
                         then(argument("displaySlot", StringArgumentType.word()).
                                 suggests(new ScoreboardSlotSuggestionProvider()).
