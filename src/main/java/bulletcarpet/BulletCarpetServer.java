@@ -38,9 +38,9 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
 
     @Override
     public void onInitialize() {
+        BulletCarpetServer.loadExtension();
         ToolItems.initialize();
         CustomStats.initialize();
-        BulletCarpetServer.loadExtension();
     }
 
     @Override
@@ -65,6 +65,7 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
                 } catch (IOException e) {
                     System.err.println("Failed to create file: " + falgFile.getAbsolutePath());
                 }
+                server.stop(false);
             }
         }
     }
