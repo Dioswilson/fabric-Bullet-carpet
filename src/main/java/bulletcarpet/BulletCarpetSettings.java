@@ -13,7 +13,7 @@ public class BulletCarpetSettings {
     public static final String BULLET = "Bullet";
 
     @Rule(
-            categories = {SURVIVAL, BULLET}
+            categories = {SURVIVAL, COMMAND, BULLET}
     )
     public static boolean scoreboardStats = true;
 
@@ -28,12 +28,13 @@ public class BulletCarpetSettings {
     public static boolean botsNoStats = true;
 
     @Rule(
-            categories = {CREATIVE, BULLET}
+            categories = {CREATIVE, COMMAND, BULLET}
     )
     public static boolean tickWarpNoTime = true;
 
     @Rule(
-            categories = {CREATIVE, EXPERIMENTAL, BULLET}
+            categories = {CREATIVE, EXPERIMENTAL, COMMAND, BULLET}
     )
     public static boolean removeStatsCommand = true;
+
 }
