@@ -132,15 +132,16 @@ public class ScoreboardStatsCommand {
         ScoreboardObjective displayObjective = scoreboard.getObjective(scoreboardName);
 
         if (displayObjective == null) {
-            final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
             ScoreboardCriterion statCriterion = ScoreboardCriterion.getOrCreateStatCriterion(criterionName).get();//Should not throw error
 
             MutableText styledTitle = Text.literal(displayName).styled(style -> style.withColor(Formatting.GOLD));
 
             displayObjective = scoreboard.addObjective(scoreboardName, statCriterion, styledTitle, RenderType.INTEGER);
-            //TODO:Async?
-            singleThreadExecutor.execute(() -> {
+
+            final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+
+            singleThreadExecutor.submit(() -> {
                 StatsHelper.initializeScoreboard(c.getSource().getServer(), scoreboardName);
             });
 

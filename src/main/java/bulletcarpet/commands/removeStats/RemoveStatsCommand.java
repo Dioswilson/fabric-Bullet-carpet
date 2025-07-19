@@ -23,6 +23,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static net.minecraft.server.command.CommandManager.argument;
 import static net.minecraft.server.command.CommandManager.literal;
@@ -69,7 +71,13 @@ public class RemoveStatsCommand {
 
         commandBuilder.then(literal("listPlayers").
                 executes(c -> {
-                    listAllPlayersWithStats(c.getSource(), c.getSource().getServer());
+                    final ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+
+                    singleThreadExecutor.submit(() -> {
+                        listAllPlayersWithStats(c.getSource(), c.getSource().getServer());
+                    });
+
+                    singleThreadExecutor.shutdown();
                     return 0;
                 }));
 
