@@ -116,7 +116,7 @@ public class ScoreboardStatsCommand {
 
     private static int executeSpecialStats(CommandContext<ServerCommandSource> c, String prefix, String statType, String displaySlot) throws CommandSyntaxException {
         executeStats(c, "", prefix, statType, displaySlot);
-        return notifyModification(c, displaySlot);
+        return 0;
     }
 
     private static void createAndShowObjective(CommandContext<ServerCommandSource> c, String criterionName, String displayName, String displaySlot) throws CommandSyntaxException {
