@@ -38,7 +38,6 @@ public class RemoveStatsCommand {
 
         LiteralArgumentBuilder<ServerCommandSource> commandBuilder = literal(NAME).requires(source -> BulletCarpetSettings.removeStatsCommand && source.hasPermissionLevel(2));
 
-        //Todo: Add specific player name
         commandBuilder.then(literal("lowPickUses").
                 executes(c -> {
                     MinecraftServer server = c.getSource().getServer();
