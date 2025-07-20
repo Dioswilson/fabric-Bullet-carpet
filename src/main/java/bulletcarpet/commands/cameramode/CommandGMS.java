@@ -19,7 +19,7 @@ public class CommandGMS {
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 
-        LiteralArgumentBuilder<ServerCommandSource> commandBuilder = literal(NAME).requires(source -> BulletCarpetSettings.commandCameramode && source.isExecutedByPlayer());
+        LiteralArgumentBuilder<ServerCommandSource> commandBuilder = literal(NAME).requires(source -> BulletCarpetSettings.commandCameraMode && source.isExecutedByPlayer());
 
         commandBuilder.executes(c -> {
             ServerPlayerEntity player = c.getSource().getPlayer();

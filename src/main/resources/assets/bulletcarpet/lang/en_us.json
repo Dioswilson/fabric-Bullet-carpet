@@ -1,20 +1,22 @@
 {
   // Categories:
-  "carpet.category.extras": "extras",
+  "carpet.category.bullet": "bullet",
   // Rules:
 
   //scoreboardStats
-  "carpet.rule.scoreboardStats.desc": "Enables scoreboard stats for players.",
+  "carpet.rule.scoreboardStats.desc": "Enables scoreboard stats for players",
   //addBotsToTeam
-  "carpet.rule.addBotsToTeam.desc": "Adds bot to Bots team.",
+  "carpet.rule.addBotsToTeam.desc": "Adds bot to Bots team",
   //botsNoStats
   "carpet.rule.botsNoStats.desc": "Bots don't sum stats, except if shadow",
   //tickWarpNoTime
-  "carpet.rule.tickWarpNoTime.desc": "Tick warps with no time argument starts an indefinite time warp .",
+  "carpet.rule.tickWarpNoTime.desc": "Tick warps with no time argument starts an indefinite time warp",
   //removeStatsCommand
   "carpet.rule.removeStatsCommand.desc": "Adds command to manually remove stats",
   //commandCameramode
-  "carpet.rule.commandCameramode.desc": "Enables /c and /s commands to quickly switch between spectator and server modes",
+  "carpet.rule.commandCameraMode.desc": "Enables /c and /s commands to quickly switch between spectator and server modes",
   //cameraModeRestoreLocation
-  "carpet.rule.cameraModeRestoreLocation.desc": "Places players back to the original location when using camera mode by using /c then /s"
+  "carpet.rule.cameraModeRestoreLocation.desc": "Places players back to the original location when using camera mode by using /c then /s",
+  //reloadFakePlayers
+  "carpet.rule.reloadFakePlayers.desc": "Reloads fake players on server startup that were loaded before server shutdown"
 }

@@ -60,7 +60,7 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
 
         if (BulletCarpetSettings.scoreboardStats) {
             File rootDir = server.getSavePath(WorldSavePath.ROOT).toFile();
-            File falgFile = new File(rootDir, "bulletcarpetStatsInit");
+            File falgFile = new File(rootDir, "bulletcarpetStatsInit"); //TODO: Maybe move into config directory
             if (!falgFile.exists()) {
                 StatsHelper.initToolItemStats(server);
                 StatsHelper.initializeHoursPlayed(server);

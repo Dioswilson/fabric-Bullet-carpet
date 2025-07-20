@@ -40,7 +40,7 @@ public class BulletCarpetSettings {
     @Rule(
             categories = {COMMAND, BULLET}
     )
-    public static boolean commandCameramode = true;
+    public static boolean commandCameraMode = true;
 
     @Rule(
             categories = {COMMAND, BULLET}
