@@ -1,8 +1,10 @@
 package bulletcarpet.helpers;
 
+import bulletcarpet.utils.CustomStats;
 import bulletcarpet.utils.ToolItems;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
+import com.mojang.logging.LogUtils;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
@@ -17,6 +19,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.WorldSavePath;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.*;
@@ -25,7 +28,9 @@ public class StatsHelper {
 
     private static Map<UUID, StatHandler> cache;
     private static int cacheTime;
-    //TODO: Logger
+
+    private static final Logger LOGGER = LogUtils.getLogger();
+
     public static String TOTAL_USER_NAME = Formatting.BOLD + " Total";
 
     public static File[] getStatFiles(MinecraftServer server) {
@@ -35,6 +40,7 @@ public class StatsHelper {
 
     public static Map<UUID, StatHandler> getAllStatistics(MinecraftServer server) {
         if (cache != null && server.getTicks() - cacheTime < 100) {
+            LOGGER.info("Using cached statistics data");
             return cache;
         }
         File[] statFiles = getStatFiles(server);
@@ -42,8 +48,10 @@ public class StatsHelper {
         HashMap<UUID, StatHandler> stats = new HashMap<>();
 
         if (statFiles == null) {
+            LOGGER.warn("No stat files found in the stats directory.");
             return stats;
         }
+        LOGGER.info("Retrieving statistics from {} files", statFiles.length);
         for (File statFile : statFiles) {
             String filename = statFile.getName();
             String uuidString = filename.substring(0, filename.lastIndexOf(".json"));
@@ -63,6 +71,7 @@ public class StatsHelper {
             } catch (IllegalArgumentException ignored) {
             }
         }
+        LOGGER.info("Finished retrieving statistics");
 
         cache = stats;
         cacheTime = server.getTicks();
@@ -89,11 +98,11 @@ public class StatsHelper {
             try {
                 profile = sessionService.fillProfileProperties(new GameProfile(uuid, null), false);
             } catch (Exception e) {
-                System.out.println("Retrying to retrieve profile for UUID: " + uuid + " - " + e.getMessage());//Maybe logger
+                LOGGER.info("Retrying profile retrieving for UUID: {} ", uuid.toString());
             }
         }
         if (profile == null) {
-            System.out.println("Failed to retrieve profile for UUID: " + uuid);//Maybe logger
+            LOGGER.warn("Failed to retrieve profile for UUID: {}", uuid);
             return null;
         }
         if (profile.isComplete()) {
@@ -121,6 +130,7 @@ public class StatsHelper {
     }
 
     public static void initializeScoreboard(MinecraftServer server, String objectiveName) {
+        LOGGER.info("Initializing {} scoreboard ", objectiveName);
         Scoreboard scoreboard = server.getScoreboard();
         ScoreboardObjective scoreObjective = scoreboard.getObjective(objectiveName);
         String criterionName = scoreObjective.getCriterion().getName();
@@ -144,6 +154,8 @@ public class StatsHelper {
             }
             ScoreboardPlayerScore totalPlayerScore = scoreboard.getPlayerScore(TOTAL_USER_NAME, scoreObjective);
             totalPlayerScore.setScore(totalScorePoints);
+
+            LOGGER.info("Finished initializing {} scoreboard ", objectiveName);
         }
     }
 
@@ -169,6 +181,8 @@ public class StatsHelper {
         List<StatType<Item>> statTypes = List.of(
                 Stats.USED, Stats.CRAFTED, Stats.BROKEN, Stats.PICKED_UP, Stats.DROPPED
         );
+
+        LOGGER.info("Initializing tool item stats ");
 
         getAllStatistics(server).forEach((uuid, statHandler) -> {
             String username = getUsername(server, uuid);
@@ -199,9 +213,12 @@ public class StatsHelper {
                 serverStatHandler.save();
             }
         });
+        LOGGER.info("Finished initializing tool item stats ");
     }
 
     public static void initializeHoursPlayed(MinecraftServer server) {
+        LOGGER.info("Initializing hours played stats ");
+
         getAllStatistics(server).forEach((uuid, statHandler) -> {
             String username = getUsername(server, uuid);
             if (username != null) {
@@ -215,6 +232,7 @@ public class StatsHelper {
                 serverStatHandler.save();
             }
         });
+        LOGGER.info("Finished initializing hours played stats ");
     }
 
     public static Item getItemFromToolType(String toolType) {//Note: Maybe this shold be on ToolItems.java?

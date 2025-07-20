@@ -8,6 +8,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
+import com.mojang.logging.LogUtils;
 import net.minecraft.item.Items;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.PlayerManager;
@@ -18,6 +19,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.UserCache;
 import net.minecraft.util.WorldSavePath;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.util.List;
@@ -32,6 +34,7 @@ import static net.minecraft.server.command.CommandManager.literal;
 public class RemoveStatsCommand {
     private static final String NAME = "removeStats";
 
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
 
@@ -105,11 +108,11 @@ public class RemoveStatsCommand {
             File statsFile = server.getSavePath(WorldSavePath.STATS).resolve(uuid.toString() + ".json").toFile();
             if (statsFile.delete()) {
                 source.sendFeedback(Text.literal(Formatting.GREEN + "Removed stats for player: " + username), false);
+                LOGGER.info("Removed stats for player: {}", username);
             }
             else {
                 source.sendFeedback(Text.literal(Formatting.RED + "Failed to remove stats file for player: " + username), false);
             }
-
         }
 
     }
@@ -142,6 +145,7 @@ public class RemoveStatsCommand {
                     if (statsFile.exists()) {
                         if (statsFile.delete()) {
                             source.sendFeedback(Text.literal(Formatting.GREEN + "Removed stats for player: " + uuid + " with " + statValue + " uses"), false);
+                            LOGGER.info("Removed stats for player: {}", uuid);
                         }
                         else {
                             source.sendFeedback(Text.literal(Formatting.RED + "Failed to remove stats file for player: " + uuid), false);

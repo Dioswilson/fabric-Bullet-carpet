@@ -8,6 +8,7 @@ import carpet.helpers.EntityPlayerActionPack.Action;
 import carpet.helpers.EntityPlayerActionPack.ActionType;
 import carpet.patches.EntityPlayerMPFake;
 import com.google.gson.reflect.TypeToken;
+import com.mojang.logging.LogUtils;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
@@ -18,6 +19,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -38,6 +40,8 @@ public class FakePlayerReloadHelper {
     private static final List<PlayerData> playersData = Collections.synchronizedList(new ArrayList<>());
 
     private static final String CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(BulletCarpetSettings.NAMESPACE).resolve("fake_players.json").toString();//Todo: wrong path for singleplayer
+
+    private static final Logger LOGGER = LogUtils.getLogger();
 
     public static void registerFakePlayerInfo(ServerPlayerEntity player) {
         final String playerName = player.getName().getString();
@@ -94,6 +98,7 @@ public class FakePlayerReloadHelper {
             }
 
             try (FileWriter writer = new FileWriter(CONFIG_PATH)) {
+                LOGGER.info("Saving {} fake players data to {}", playersData.size(), CONFIG_PATH);
                 GSON.toJson(playersData, writer);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -104,6 +109,8 @@ public class FakePlayerReloadHelper {
 
     public static void loadFakePlayers(MinecraftServer server) {
         List<PlayerData> players = getPlayerDataFromFile(CONFIG_PATH);
+
+        LOGGER.info("Respawning fake players");
 
         for (PlayerData playerData : players) {
             Identifier dimensionId = new Identifier("minecraft", playerData.dimension);

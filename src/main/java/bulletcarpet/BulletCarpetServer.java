@@ -99,12 +99,10 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
     public void onGameStarted() {
         // let's /carpet handle our few simple settings
         CarpetServer.settingsManager.parseSettingsClass(BulletCarpetSettings.class);
-        //Más cosas
     }
 
     @Override
     public void registerCommands(CommandDispatcher<ServerCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
-        // here goes extra stuff
         ScoreboardStatsCommand.register(dispatcher);
         RemoveStatsCommand.register(dispatcher);
         CameraSpectatorCommand.register(dispatcher);
