@@ -13,7 +13,7 @@ import net.minecraft.world.GameMode;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
-public class CommandGMS {
+public class CameraSurvivalCommand {
 
     private static final String NAME = "s";
 

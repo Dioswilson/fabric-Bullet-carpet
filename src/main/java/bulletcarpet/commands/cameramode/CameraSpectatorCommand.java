@@ -14,7 +14,7 @@ import net.minecraft.world.GameMode;
 
 import static net.minecraft.server.command.CommandManager.literal;
 
-public class CommandGMC {
+public class CameraSpectatorCommand {
 
     private static final String NAME = "c";
 

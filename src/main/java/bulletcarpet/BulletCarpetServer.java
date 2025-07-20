@@ -1,7 +1,7 @@
 package bulletcarpet;
 
-import bulletcarpet.commands.cameramode.CommandGMC;
-import bulletcarpet.commands.cameramode.CommandGMS;
+import bulletcarpet.commands.cameramode.CameraSpectatorCommand;
+import bulletcarpet.commands.cameramode.CameraSurvivalCommand;
 import bulletcarpet.commands.removeStats.RemoveStatsCommand;
 import bulletcarpet.commands.scoreboardStats.ScoreboardStatsCommand;
 import bulletcarpet.helpers.FakePlayerReloadHelper;
@@ -107,8 +107,8 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
         // here goes extra stuff
         ScoreboardStatsCommand.register(dispatcher);
         RemoveStatsCommand.register(dispatcher);
-        CommandGMC.register(dispatcher);
-        CommandGMS.register(dispatcher);
+        CameraSpectatorCommand.register(dispatcher);
+        CameraSurvivalCommand.register(dispatcher);
     }
 
     @Override
