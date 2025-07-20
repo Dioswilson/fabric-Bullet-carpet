@@ -44,7 +44,7 @@ public class BulletCarpetSettings {
 
     @Rule(
             categories = {COMMAND, BULLET}
-    )
+   )
     public static boolean cameraModeRestoreLocation = true;
 
     @Rule(
@@ -56,5 +56,10 @@ public class BulletCarpetSettings {
             categories = {FEATURE, COMMAND, BULLET}
     )
     public static boolean saveFakePlayersActions = true;
+
+    @Rule(
+            categories = {SURVIVAL,FEATURE, BULLET}
+    )
+    public static boolean instamineDeepslate=true;
 
 }

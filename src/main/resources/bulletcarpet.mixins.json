@@ -3,6 +3,7 @@
   "package": "bulletcarpet.mixins",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractBlockMixin",
     "EntityPlayerActionPackAccessor",
     "EntityPlayerMPFakeMixin",
     "ItemStackMixin",

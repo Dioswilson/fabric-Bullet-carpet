@@ -20,5 +20,7 @@
   //reloadFakePlayers
   "carpet.rule.reloadFakePlayers.desc": "Reloads fake players on server startup that were loaded before server shutdown",
   //saveFakePlayersActions
-  "carpet.rule.saveFakePlayersActions.desc": "Saves fake players actions and restores them on server startup"
+  "carpet.rule.saveFakePlayersActions.desc": "Saves fake players actions and restores them on server startup",
+  //instamineDeepslate
+  "carpet.rule.instamineDeepslate.desc": "Allows instamining deepslate blocks with netherite pickaxe + haste 2."
 }
