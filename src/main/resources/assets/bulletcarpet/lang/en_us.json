@@ -18,5 +18,7 @@
   //cameraModeRestoreLocation
   "carpet.rule.cameraModeRestoreLocation.desc": "Places players back to the original location when using camera mode by using /c then /s",
   //reloadFakePlayers
-  "carpet.rule.reloadFakePlayers.desc": "Reloads fake players on server startup that were loaded before server shutdown"
+  "carpet.rule.reloadFakePlayers.desc": "Reloads fake players on server startup that were loaded before server shutdown",
+  //saveFakePlayersActions
+  "carpet.rule.saveFakePlayersActions.desc": "Saves fake players actions and restores them on server startup"
 }

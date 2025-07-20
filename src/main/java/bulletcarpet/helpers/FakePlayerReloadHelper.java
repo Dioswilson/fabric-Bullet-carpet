@@ -1,9 +1,12 @@
 package bulletcarpet.helpers;
 
 import bulletcarpet.BulletCarpetSettings;
+import bulletcarpet.mixins.EntityPlayerActionPackAccessor;
+import carpet.fakes.ServerPlayerInterface;
+import carpet.helpers.EntityPlayerActionPack;
+import carpet.helpers.EntityPlayerActionPack.Action;
+import carpet.helpers.EntityPlayerActionPack.ActionType;
 import carpet.patches.EntityPlayerMPFake;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.registry.RegistryKey;
@@ -14,6 +17,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -25,18 +29,18 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import static carpet.script.api.Auxiliary.GSON;
 
 public class FakePlayerReloadHelper {
 
-    private static List<PlayerData> playersData = Collections.synchronizedList(new ArrayList<>());
+    private static final List<PlayerData> playersData = Collections.synchronizedList(new ArrayList<>());
 
-    private static final String CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(BulletCarpetSettings.NAMESPACE).
-            resolve("fake_players.json").toString();//Todo: wrong path for singleplayer
+    private static final String CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(BulletCarpetSettings.NAMESPACE).resolve("fake_players.json").toString();//Todo: wrong path for singleplayer
 
     public static void registerFakePlayerInfo(ServerPlayerEntity player) {
-        final String name = player.getName().getString();
+        final String playerName = player.getName().getString();
         final Vec3d position = player.getPos();
         final float yaw = player.getYaw();
         final float pitch = player.getPitch();
@@ -44,7 +48,39 @@ public class FakePlayerReloadHelper {
         final String gamemode = player.interactionManager.getGameMode().getName();
         final boolean isFlying = player.getAbilities().flying;
 
-        playersData.add(new PlayerData(name, position, yaw, pitch, dimension, gamemode, isFlying));
+        boolean isSprinting = false;
+        boolean isSneaking = false;
+        float forward = 0.0f;
+        float strafing = 0.0f;
+
+        if (BulletCarpetSettings.saveFakePlayersActions) {
+            EntityPlayerActionPackAccessor actionPackAccessor = (EntityPlayerActionPackAccessor) ((ServerPlayerInterface) player).getActionPack();
+            isSneaking = actionPackAccessor.isSneaking();
+            isSprinting = actionPackAccessor.isSprinting();
+            forward = actionPackAccessor.getForward();
+            strafing = actionPackAccessor.getStrafing();
+        }
+
+        List<ActionData> actions = getActionDataIfNeeded((ServerPlayerInterface) player, BulletCarpetSettings.saveFakePlayersActions);
+
+        playersData.add(new PlayerData(playerName, position, yaw, pitch, dimension, gamemode, isFlying, isSneaking, isSprinting, forward, strafing, actions));
+    }
+
+    private static @NotNull List<ActionData> getActionDataIfNeeded(ServerPlayerInterface player, boolean needed) {
+        List<ActionData> actions = new ArrayList<>();
+
+        if (needed) {
+            EntityPlayerActionPackAccessor actionPackAccessor = (EntityPlayerActionPackAccessor) ((ServerPlayerInterface) player).getActionPack();
+            Map<ActionType, Action> playerActions = actionPackAccessor.getActions();
+
+            for (Map.Entry<ActionType, Action> entry : playerActions.entrySet()) {
+                ActionType actionType = entry.getKey();
+                Action action = entry.getValue();
+
+                actions.add(new ActionData(actionType.name(), action));
+            }
+        }
+        return actions;
     }
 
     public static void saveFakePlayersInfo() {
@@ -75,8 +111,21 @@ public class FakePlayerReloadHelper {
             RegistryKey<World> dimensionKey = RegistryKey.of(RegistryKeys.WORLD, dimensionId);
             GameMode gameMode = GameMode.byName(playerData.gamemode);
 
-            EntityPlayerMPFake.createFake(playerData.name, server, playerData.position.x, playerData.position.y, playerData.position.z,
-                    playerData.yaw, playerData.pitch, dimensionKey, gameMode, playerData.isFlying);
+            EntityPlayerMPFake fakePlayer = EntityPlayerMPFake.createFake(playerData.name, server, playerData.position.x, playerData.position.y, playerData.position.z, playerData.yaw, playerData.pitch, dimensionKey, gameMode, playerData.isFlying);
+
+            EntityPlayerActionPack actionPack = ((ServerPlayerInterface) fakePlayer).getActionPack();
+
+            actionPack.setSneaking(playerData.sneaking);
+            actionPack.setSprinting(playerData.sprinting);
+            actionPack.setForward(playerData.forward);
+            actionPack.setStrafing(playerData.strafing);
+
+            for (ActionData actionData : playerData.actions) {
+                ActionType actionType = ActionType.valueOf(actionData.actionName);
+                Action action = actionData.action;
+
+                ((EntityPlayerActionPackAccessor) actionPack).getActions().put(actionType, action);
+            }
         }
 
     }
@@ -107,9 +156,12 @@ public class FakePlayerReloadHelper {
 
 
     private record PlayerData(String name, Vec3d position, float yaw, float pitch, String dimension, String gamemode,
-                              boolean isFlying) {
-        //TODO: Save current action
+                              boolean isFlying, boolean sneaking, boolean sprinting, float forward, float strafing,
+                              List<ActionData> actions) {
 
+    }
+
+    private record ActionData(String actionName, Action action) {
     }
 
 
