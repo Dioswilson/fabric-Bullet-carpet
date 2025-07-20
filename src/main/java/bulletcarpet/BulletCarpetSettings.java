@@ -47,4 +47,8 @@ public class BulletCarpetSettings {
     )
     public static boolean cameraModeRestoreLocation = true;
 
+    @Rule(
+        categories = {FEATURE,COMMAND, BULLET}
+    )
+    public static boolean reloadFakePlayers = true;
 }

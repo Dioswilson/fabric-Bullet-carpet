@@ -4,11 +4,13 @@ import bulletcarpet.commands.cameramode.CommandGMC;
 import bulletcarpet.commands.cameramode.CommandGMS;
 import bulletcarpet.commands.removeStats.RemoveStatsCommand;
 import bulletcarpet.commands.scoreboardStats.ScoreboardStatsCommand;
-import bulletcarpet.utils.CustomStats;
+import bulletcarpet.helpers.FakePlayerReloadHelper;
 import bulletcarpet.helpers.StatsHelper;
+import bulletcarpet.utils.CustomStats;
 import bulletcarpet.utils.ToolItems;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
+import carpet.script.external.Carpet;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.brigadier.CommandDispatcher;
@@ -16,6 +18,7 @@ import net.fabricmc.api.ModInitializer;
 import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.WorldSavePath;
 import org.apache.commons.io.IOUtils;
 
@@ -25,6 +28,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public class BulletCarpetServer implements CarpetExtension, ModInitializer {
@@ -67,6 +71,27 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
                     System.err.println("Failed to create file: " + falgFile.getAbsolutePath());
                 }
             }
+        }
+        if (BulletCarpetSettings.reloadFakePlayers) {
+            FakePlayerReloadHelper.loadFakePlayers(server);
+        }
+    }
+
+    @Override
+    public void onServerClosed(MinecraftServer server) {
+        CarpetExtension.super.onServerClosed(server);
+
+        if (BulletCarpetSettings.reloadFakePlayers) {
+            List<ServerPlayerEntity> playerList = server.getPlayerManager().getPlayerList();
+
+            for (ServerPlayerEntity player : playerList) {
+                String playerType = Carpet.isModdedPlayer(player);
+                if (playerType != null) {
+                    FakePlayerReloadHelper.registerFakePlayerInfo(player);
+                }
+            }
+            FakePlayerReloadHelper.saveFakePlayersInfo();
+
         }
     }
 
