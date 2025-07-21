@@ -34,10 +34,5 @@
   "carpet.rule.extremeBehaviours.extra.5": "- Blaze aggro sensitivity",
   "carpet.rule.extremeBehaviours.extra.6": "- Mobs spawned follow range",
   "carpet.rule.extremeBehaviours.extra.7": "- Campfire entities spawning",
-  "carpet.rule.extremeBehaviours.extra.8": "- Items inside chiseled bookshelf",
-  // blockStateSyncing
-  "carpet.rule.blockStateSyncing.desc": "Fixes block states in F3 debug mode not updating for some blocks.",
-  "carpet.rule.blockStateSyncing.extra.0": "May cause increased network traffic.",
-  // accurateBlockPlacement
-  "carpet.rule.accurateBlockPlacement.desc": "Client can provide alternative block placement."
+  "carpet.rule.extremeBehaviours.extra.8": "- Items inside chiseled bookshelf"
 }

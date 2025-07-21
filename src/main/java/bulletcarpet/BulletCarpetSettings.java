@@ -67,15 +67,4 @@ public class BulletCarpetSettings {
     )
     public static boolean extremeBehaviours = true;
 
-    //Stolen from Carpet extra (https://github.com/gnembon/carpet-extra)
-    @Rule(
-            categories = {SURVIVAL, FEATURE, EXTRA, BULLET}
-    )
-    public static boolean accurateBlockPlacement = true;
-
-    @Rule(
-            categories = {BUGFIX, EXTRA, BULLET}
-    )
-    public static boolean blockStateSyncing = true;
-
 }
