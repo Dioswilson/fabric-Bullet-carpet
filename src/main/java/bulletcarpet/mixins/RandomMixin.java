@@ -9,9 +9,9 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Random.class)
-public abstract class RandomMixin {
+public interface RandomMixin {
     @Shadow
-    public abstract double nextDouble();
+    double nextDouble();
 
     @Inject(method = "nextTriangular",
             at = @At("HEAD"),

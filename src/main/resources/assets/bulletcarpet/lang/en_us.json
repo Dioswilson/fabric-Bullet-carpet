@@ -22,10 +22,10 @@
   //saveFakePlayersActions
   "carpet.rule.saveFakePlayersActions.desc": "Saves fake players actions and restores them on server startup",
   //instamineDeepslate
-  "carpet.rule.instamineDeepslate.desc": "Allows instamining deepslate blocks with netherite pickaxe + haste 2."
   "carpet.rule.instamineDeepslate.desc": "Allows instamining deepslate blocks with netherite pickaxe + haste 2.",
   //extremeBehaviours
   "carpet.rule.extremeBehaviours.desc": "Edge cases are as frequent as common cases, for testing only!!",
+
   "carpet.rule.extremeBehaviours.extra.0": "The following things are affected:",
   "carpet.rule.extremeBehaviours.extra.1": "- Velocities of items from dispensers, blaze projectiles, fireworks ",
   "carpet.rule.extremeBehaviours.extra.2": "- Directions of fireballs, wither skulls, fishing bobbers, ",
@@ -35,4 +35,9 @@
   "carpet.rule.extremeBehaviours.extra.6": "- Mobs spawned follow range",
   "carpet.rule.extremeBehaviours.extra.7": "- Campfire entities spawning",
   "carpet.rule.extremeBehaviours.extra.8": "- Items inside chiseled bookshelf",
+  // blockStateSyncing
+  "carpet.rule.blockStateSyncing.desc": "Fixes block states in F3 debug mode not updating for some blocks.",
+  "carpet.rule.blockStateSyncing.extra.0": "May cause increased network traffic.",
+  // accurateBlockPlacement
+  "carpet.rule.accurateBlockPlacement.desc": "Client can provide alternative block placement."
 }
