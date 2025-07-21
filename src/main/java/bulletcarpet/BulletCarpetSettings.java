@@ -15,7 +15,7 @@ public class BulletCarpetSettings {
     @Rule(
             categories = {SURVIVAL, COMMAND, BULLET}
     )
-    public static boolean scoreboardStats = true;
+    public static boolean scoreboardStats;
 
     @Rule(
             categories = {BULLET}
@@ -25,7 +25,7 @@ public class BulletCarpetSettings {
     @Rule(
             categories = {BULLET}
     )
-    public static boolean botsNoStats = true;
+    public static boolean botsNoStats;
 
     @Rule(
             categories = {CREATIVE, COMMAND, BULLET}
@@ -35,36 +35,36 @@ public class BulletCarpetSettings {
     @Rule(
             categories = {CREATIVE, EXPERIMENTAL, COMMAND, BULLET}
     )
-    public static boolean removeStatsCommand = true;
+    public static boolean removeStatsCommand;
 
     @Rule(
             categories = {COMMAND, BULLET}
     )
-    public static boolean commandCameraMode = true;
+    public static boolean commandCameraMode;
 
     @Rule(
             categories = {COMMAND, BULLET}
-   )
-    public static boolean cameraModeRestoreLocation = true;
+    )
+    public static boolean cameraModeRestoreLocation;
 
     @Rule(
             categories = {FEATURE, COMMAND, BULLET}
     )
-    public static boolean reloadFakePlayers = true;
+    public static boolean reloadFakePlayers;
 
     @Rule(
             categories = {FEATURE, COMMAND, BULLET}
     )
-    public static boolean saveFakePlayersActions = true;
+    public static boolean saveFakePlayersActions;
 
     @Rule(
             categories = {SURVIVAL, FEATURE, BULLET}
     )
-    public static boolean instamineDeepslate = true;
+    public static boolean instamineDeepslate;
 
     @Rule(
             categories = {CREATIVE, BULLET}
     )
-    public static boolean extremeBehaviours = true;
+    public static boolean extremeBehaviours;
 
 }
