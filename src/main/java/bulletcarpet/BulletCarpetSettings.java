@@ -58,8 +58,24 @@ public class BulletCarpetSettings {
     public static boolean saveFakePlayersActions = true;
 
     @Rule(
-            categories = {SURVIVAL,FEATURE, BULLET}
+            categories = {SURVIVAL, FEATURE, BULLET}
     )
-    public static boolean instamineDeepslate=true;
+    public static boolean instamineDeepslate = true;
+
+    @Rule(
+            categories = {CREATIVE, BULLET}
+    )
+    public static boolean extremeBehaviours = true;
+
+    //Stolen from Carpet extra (https://github.com/gnembon/carpet-extra)
+    @Rule(
+            categories = {SURVIVAL, FEATURE, EXTRA, BULLET}
+    )
+    public static boolean accurateBlockPlacement = true;
+
+    @Rule(
+            categories = {BUGFIX, EXTRA, BULLET}
+    )
+    public static boolean blockStateSyncing = true;
 
 }

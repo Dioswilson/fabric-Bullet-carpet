@@ -9,6 +9,7 @@
     "ItemStackMixin",
     "PlayerEntityMixin",
     "PlayerManagerMixin",
+    "RandomMixin",
     "RegistrySyncManagerMixin",
     "ScoreboardCriteriaMixin",
     "ServerPlayerEntityMixin",
