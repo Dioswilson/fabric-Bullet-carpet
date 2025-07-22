@@ -7,6 +7,7 @@ import bulletcarpet.commands.scoreboardStats.ScoreboardStatsCommand;
 import bulletcarpet.helpers.FakePlayerReloadHelper;
 import bulletcarpet.helpers.StatsHelper;
 import bulletcarpet.utils.CustomStats;
+import bulletcarpet.utils.ModUtils;
 import bulletcarpet.utils.ToolItems;
 import carpet.CarpetExtension;
 import carpet.CarpetServer;
@@ -19,7 +20,6 @@ import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.WorldSavePath;
 import org.apache.commons.io.IOUtils;
 
 import java.io.File;
@@ -51,7 +51,7 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
     @Override
     public void onServerLoaded(MinecraftServer server) {
         CarpetExtension.super.onServerLoaded(server);
-
+        ModUtils.setMinecraftServer(server);
     }
 
     @Override
@@ -59,8 +59,7 @@ public class BulletCarpetServer implements CarpetExtension, ModInitializer {
         CarpetExtension.super.onServerLoadedWorlds(server);
 
         if (BulletCarpetSettings.scoreboardStats) {
-            File rootDir = server.getSavePath(WorldSavePath.ROOT).toFile();
-            File falgFile = new File(rootDir, "bulletcarpetStatsInit"); //TODO: Maybe move into config directory
+            File falgFile = new File(ModUtils.getStatInitFileName());
             if (!falgFile.exists()) {
                 StatsHelper.initToolItemStats(server);
                 StatsHelper.initializeHoursPlayed(server);

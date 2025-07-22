@@ -8,7 +8,6 @@ import static carpet.api.settings.RuleCategory.*;
  * Here is your example Settings class you can plug to use carpetmod /carpet settings command
  */
 public class BulletCarpetSettings {
-    public static String NAMESPACE = "bullet-carpet";
 
     public static final String BULLET = "Bullet";
 

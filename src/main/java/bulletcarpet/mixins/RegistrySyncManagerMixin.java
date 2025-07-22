@@ -1,6 +1,7 @@
 package bulletcarpet.mixins;
 
 import bulletcarpet.BulletCarpetSettings;
+import bulletcarpet.utils.ModUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.fabricmc.fabric.impl.registry.sync.RegistrySyncManager;
 import net.fabricmc.fabric.impl.registry.sync.packet.RegistryPacketHandler;
@@ -31,7 +32,7 @@ public class RegistrySyncManagerMixin {
         for (Entry<Identifier, Object2IntMap<Identifier>> entry : map.entrySet()) {
             Object2IntMap<Identifier> value = entry.getValue();
             value.forEach((identifier, i) -> {
-                if (identifier.getNamespace().equals(BulletCarpetSettings.NAMESPACE)
+                if (identifier.getNamespace().equals(ModUtils.NAMESPACE)
                         || identifier.getPath().contains("pottery")) { //Note: Might cause an issue if FeatureFlag.UPDATE_1_20 is on
                     //Note: Pottery items are ignored to mantain compatibility with 1.20 clients with Viaversion
                     value.remove(identifier); //Note: Deprecated, but works

@@ -2,6 +2,7 @@ package bulletcarpet.helpers;
 
 import bulletcarpet.BulletCarpetSettings;
 import bulletcarpet.mixins.EntityPlayerActionPackAccessor;
+import bulletcarpet.utils.ModUtils;
 import carpet.fakes.ServerPlayerInterface;
 import carpet.helpers.EntityPlayerActionPack;
 import carpet.helpers.EntityPlayerActionPack.Action;
@@ -9,7 +10,6 @@ import carpet.helpers.EntityPlayerActionPack.ActionType;
 import carpet.patches.EntityPlayerMPFake;
 import com.google.gson.reflect.TypeToken;
 import com.mojang.logging.LogUtils;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.server.MinecraftServer;
@@ -39,7 +39,7 @@ public class FakePlayerReloadHelper {
 
     private static final List<PlayerData> playersData = Collections.synchronizedList(new ArrayList<>());
 
-    private static final String CONFIG_PATH = FabricLoader.getInstance().getConfigDir().resolve(BulletCarpetSettings.NAMESPACE).resolve("fake_players.json").toString();//Todo: wrong path for singleplayer
+    private static final String CONFIG_PATH = ModUtils.getConfigPath().resolve("fake_players.json").toString();
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
@@ -92,7 +92,7 @@ public class FakePlayerReloadHelper {
             File file = new File(CONFIG_PATH);
 
             try {
-                ensureConfigFileExists(file.toPath());
+                ModUtils.ensureConfigFileExists(file.toPath());
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -135,14 +135,6 @@ public class FakePlayerReloadHelper {
             }
         }
 
-    }
-
-    //Todo: Utils class?
-    private static void ensureConfigFileExists(Path configPath) throws IOException {
-        Files.createDirectories(configPath.getParent());
-        if (!Files.exists(configPath)) {
-            Files.createFile(configPath);
-        }
     }
 
     private static List<PlayerData> getPlayerDataFromFile(String filePath) {

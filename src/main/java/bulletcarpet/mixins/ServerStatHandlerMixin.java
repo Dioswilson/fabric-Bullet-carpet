@@ -1,6 +1,7 @@
 package bulletcarpet.mixins;
 
 import bulletcarpet.BulletCarpetSettings;
+import bulletcarpet.utils.ModUtils;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.stat.ServerStatHandler;
 import net.minecraft.stat.Stat;
@@ -24,7 +25,7 @@ public class ServerStatHandlerMixin {
     }
 
     private boolean isVanillaStat(Stat<?> stat) {
-        return !(stat.getName().contains(BulletCarpetSettings.NAMESPACE) || stat.getName().contains("hours_played"));
+        return !(stat.getName().contains(ModUtils.NAMESPACE) || stat.getName().contains("hours_played"));
     }
 
 }

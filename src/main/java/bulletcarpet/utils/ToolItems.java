@@ -1,6 +1,5 @@
 package bulletcarpet.utils;
 
-import bulletcarpet.BulletCarpetSettings;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -17,7 +16,7 @@ public class ToolItems {
     public static final Item ALL_TOOLS = register("all_tools", new Item(new Item.Settings()));
 
     public static <T extends Item> T register(String path, T item) {
-        return Registry.register(Registries.ITEM, new Identifier(BulletCarpetSettings.NAMESPACE, path), item);
+        return Registry.register(Registries.ITEM, new Identifier(ModUtils.NAMESPACE, path), item);
     }
 
     public static void initialize() {

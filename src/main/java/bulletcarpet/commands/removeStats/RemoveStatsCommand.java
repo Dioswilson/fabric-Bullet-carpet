@@ -2,6 +2,7 @@ package bulletcarpet.commands.removeStats;
 
 import bulletcarpet.BulletCarpetSettings;
 import bulletcarpet.helpers.StatsHelper;
+import bulletcarpet.utils.ModUtils;
 import bulletcarpet.utils.ToolItems;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.CommandDispatcher;
@@ -127,8 +128,7 @@ public class RemoveStatsCommand {
         stats.forEach((uuid, statHandler) -> {
             int statValue = 0;
 
-            File rootDir = server.getSavePath(WorldSavePath.ROOT).toFile();
-            File falgFile = new File(rootDir, "bulletcarpetStatsInit");//TODO: Extract fileName
+            File falgFile = new File(ModUtils.getStatInitFileName());
             if (falgFile.exists()) {
                 statValue = statHandler.getStat(Stats.USED.getOrCreateStat(ToolItems.PICKAXE));//only pickaxe uses yet
             }
