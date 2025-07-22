@@ -67,4 +67,8 @@ public class BulletCarpetSettings {
     )
     public static boolean extremeBehaviours;
 
+    @Rule(
+            categories = {SURVIVAL, FEATURE, BULLET}
+    )
+    public static boolean stackableShulkersPlayerInventory;
 }

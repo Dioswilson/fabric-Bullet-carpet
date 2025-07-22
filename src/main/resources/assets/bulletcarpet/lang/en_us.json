@@ -34,5 +34,7 @@
   "carpet.rule.extremeBehaviours.extra.5": "- Blaze aggro sensitivity",
   "carpet.rule.extremeBehaviours.extra.6": "- Mobs spawned follow range",
   "carpet.rule.extremeBehaviours.extra.7": "- Campfire entities spawning",
-  "carpet.rule.extremeBehaviours.extra.8": "- Items inside chiseled bookshelf"
+  "carpet.rule.extremeBehaviours.extra.8": "- Items inside chiseled bookshelf",
+  //stackableShulkersPlayerInventory
+  "carpet.rule.stackableShulkersPlayerInventory.desc":"Allows empty shulkerboxes to stack in the player inventory"
 }

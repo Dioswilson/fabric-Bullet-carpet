@@ -140,7 +140,7 @@ public class StatsHelper {
         Optional<Stat<?>> stat = resolveStat(criterionName, typeSeparationIndex);
 
         if (stat.isPresent()) { //Else log error
-            int totalScorePoints = 0;//Note: Try to use long?
+            int totalScorePoints = 0;//Try to use long?
 
             for (Map.Entry<UUID, StatHandler> statEntry : getAllStatistics(server).entrySet()) {
                 int scorePoints = statEntry.getValue().getStat(stat.get());
