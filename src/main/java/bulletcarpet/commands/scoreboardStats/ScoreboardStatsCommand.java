@@ -10,6 +10,8 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
+import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.registry.DefaultedRegistry;
 import net.minecraft.registry.Registries;
 import net.minecraft.scoreboard.Scoreboard;
@@ -52,13 +54,19 @@ public class ScoreboardStatsCommand {
                     regitry = Registries.ENTITY_TYPE;
                 }
 
-                for (Identifier mobIdentifier : regitry.getIds()) {
-                    String entryName = mobIdentifier.getPath();
+                for (Identifier registryIdentifier : regitry.getIds()) {
+                    String entryName = registryIdentifier.getPath();
+                    if (filteredType.equals("mined")) {
+                        Item item = Registries.ITEM.get(registryIdentifier);
+                        if (!(item instanceof BlockItem)) {
+                            continue;
+                        }
+                    }
                     commandBuilder.then(literal(filteredType).then(literal(entryName).
-                            executes(c -> executeStats(c, mobIdentifier.getNamespace(), filteredType + ":", entryName, "sidebar")).
+                            executes(c -> executeStats(c, registryIdentifier.getNamespace(), filteredType + ":", entryName, "sidebar")).
                             then(argument("displaySlot", StringArgumentType.word()).
                                     suggests(new ScoreboardSlotSuggestionProvider()).
-                                    executes(c -> executeStats(c, mobIdentifier.getNamespace(), filteredType + ":", entryName, StringArgumentType.getString(c, "displaySlot")))))
+                                    executes(c -> executeStats(c, registryIdentifier.getNamespace(), filteredType + ":", entryName, StringArgumentType.getString(c, "displaySlot")))))
                     );
                 }
             }
@@ -91,7 +99,7 @@ public class ScoreboardStatsCommand {
                 prefix = "";
             }
 
-            if (!key.contains("teamkill.")&&!(key.contains("killedByTeam"))) { //Maybe si hay team de bots, añadir excepción
+            if (!key.contains("teamkill.") && !(key.contains("killedByTeam"))) { //Maybe si hay team de bots, añadir excepción
                 commandBuilder.then(literal(filteredKey).executes(c -> executeSpecialStats(c, prefix, filteredKey, "sidebar")).
                         then(argument("displaySlot", StringArgumentType.word()).
                                 suggests(new ScoreboardSlotSuggestionProvider()).
