@@ -92,7 +92,10 @@ public class RemoveStatsCommand {
         StatsHelper.getAllStatistics(server).forEach(((uuid, statHandler) -> {
             String playerName = StatsHelper.getUsername(server, uuid);
             if (playerName != null) {
-                source.sendFeedback(Text.literal(Formatting.DARK_AQUA + playerName), false);
+                int playTime = statHandler.getStat(Stats.CUSTOM.getOrCreateStat(Stats.PLAY_TIME));
+                if (playTime > 0) {
+                    source.sendFeedback(Text.literal(Formatting.DARK_AQUA + playerName), false);
+                }
             }
         }));
 

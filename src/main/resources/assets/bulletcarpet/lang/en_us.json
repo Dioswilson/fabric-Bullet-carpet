@@ -8,13 +8,17 @@
   "carpet.rule.scoreboardStats.extra.0": "It tracks all game stats and adds `hours_played`",
   "carpet.rule.scoreboardStats.extra.1": "Adds the sum of `pickaxes`, `axes`, `shovels`, `hoes` and `all_tools`",
   //addBotsToTeam
-  "carpet.rule.addBotsToTeam.desc": "Adds bot to Bots team",
+  "carpet.rule.addBotsToTeam.desc": "Adds bot to Bots team with dark green color",
   //botsNoStats
   "carpet.rule.botsNoStats.desc": "Bots don't sum stats, except if shadow",
   //tickWarpNoTime
   "carpet.rule.tickWarpNoTime.desc": "Tick warps with no time argument starts an indefinite time warp",
   //removeStatsCommand
-  "carpet.rule.removeStatsCommand.desc": "Adds command to manually remove stats",
+  "carpet.rule.removeStatsCommand.desc": "Adds command to list or manually remove stats",
+
+  "carpet.rule.removeStatsCommand.extra.0": "Players whose stats are being removed shouldn't be online",
+  "carpet.rule.removeStatsCommand.extra.1": "You might need to restart the server for this to take full effect",
+  "carpet.rule.removeStatsCommand.extra.2": "If you are using scoreboardStats, remember reinitializing the scoreboard",
   //commandCameramode
   "carpet.rule.commandCameraMode.desc": "Enables /c and /s commands to quickly switch between spectator and server modes",
   //cameraModeRestoreLocation
