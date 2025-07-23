@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import static com.mojang.text2speech.Narrator.LOGGER;
 
-//NOTE: Mixin not loaded
 @Mixin(ServerPlayerInteractionManager.class)
 public class ServerPlayerInteractionManagerMixin {
 
@@ -20,8 +19,7 @@ public class ServerPlayerInteractionManagerMixin {
     )
     private void silenceDestroyMismatchWarning(Logger instance, String s, Object miningPos, Object pos) {
 
-        //This is so wrong.... (Not actually loading this mixin)
-        if (!BulletCarpetSettings.instamineDeepslate) {
+        if (!BulletCarpetSettings.silenceMismatchDestroyBlock) {
             LOGGER.warn((String) "Mismatch in destroy block pos: {} {}", (Object) miningPos, (Object) pos);
         }
 

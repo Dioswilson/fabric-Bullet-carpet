@@ -25,6 +25,10 @@
   "carpet.rule.saveFakePlayersActions.desc": "Saves fake players actions and restores them on server startup if reloadFakePlayers is enabled ",
   //instamineDeepslate
   "carpet.rule.instamineDeepslate.desc": "Allows instamining deepslate blocks with netherite pickaxe + haste 2.",
+  //silenceMismatchDestroyBlock
+  "carpet.rule.silenceMismatchDestroyBlock.desc": "Silences warning about mismatched destroy block",
+
+  "carpet.rule.silenceMismatchDestroyBlock.extra.0": "Using instamine deepslate throws this warning",
   //extremeBehaviours
   "carpet.rule.extremeBehaviours.desc": "Edge cases are as frequent as common cases, for testing only!!",
 

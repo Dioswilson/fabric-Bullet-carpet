@@ -62,6 +62,11 @@ public class BulletCarpetSettings {
     public static boolean instamineDeepslate;
 
     @Rule(
+            categories = {SURVIVAL, EXPERIMENTAL, BULLET}
+    )
+    public static boolean silenceMismatchDestroyBlock;
+
+    @Rule(
             categories = {CREATIVE, BULLET}
     )
     public static boolean extremeBehaviours;

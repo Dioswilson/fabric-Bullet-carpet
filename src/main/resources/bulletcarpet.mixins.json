@@ -15,6 +15,7 @@
     "ScoreboardCriteriaMixin",
     "ScreenHandlerMixin",
     "ServerPlayerEntityMixin",
+    "ServerPlayerInteractionManagerMixin",
     "ServerStatHandlerMixin",
     "TickCommandMixin"
   ],
