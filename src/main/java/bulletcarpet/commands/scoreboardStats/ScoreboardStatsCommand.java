@@ -191,7 +191,7 @@ public class ScoreboardStatsCommand {
         while (scoresIterator.hasNext()) {
             ScoreboardObjective scoreObjective = scoresIterator.next();
             if (scoreObjective.getName().startsWith("st.")) {
-                scoresIterator.remove();
+                scoreboard.removeObjective(scoreObjective);
             }
         }
         for (int i = 0; i <= 2; i++) {
