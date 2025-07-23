@@ -5,6 +5,8 @@
 
   //scoreboardStats
   "carpet.rule.scoreboardStats.desc": "Enables scoreboard stats for players",
+  "carpet.rule.scoreboardStats.extra.0": "It tracks all game stats and adds `hours_played`",
+  "carpet.rule.scoreboardStats.extra.1": "Adds the sum of `pickaxes`, `axes`, `shovels`, `hoes` and `all_tools`",
   //addBotsToTeam
   "carpet.rule.addBotsToTeam.desc": "Adds bot to Bots team",
   //botsNoStats
@@ -20,7 +22,7 @@
   //reloadFakePlayers
   "carpet.rule.reloadFakePlayers.desc": "Reloads fake players on server startup that were loaded before server shutdown",
   //saveFakePlayersActions
-  "carpet.rule.saveFakePlayersActions.desc": "Saves fake players actions and restores them on server startup",
+  "carpet.rule.saveFakePlayersActions.desc": "Saves fake players actions and restores them on server startup if reloadFakePlayers is enabled ",
   //instamineDeepslate
   "carpet.rule.instamineDeepslate.desc": "Allows instamining deepslate blocks with netherite pickaxe + haste 2.",
   //extremeBehaviours
@@ -36,5 +38,6 @@
   "carpet.rule.extremeBehaviours.extra.7": "- Campfire entities spawning",
   "carpet.rule.extremeBehaviours.extra.8": "- Items inside chiseled bookshelf",
   //stackableShulkersPlayerInventory
-  "carpet.rule.stackableShulkersPlayerInventory.desc":"Allows empty shulkerboxes to stack in the player inventory"
+  "carpet.rule.stackableShulkersPlayerInventory.desc": "Allows empty shulkerboxes to stack in the player inventory",
+  "carpet.rule.stackableShulkersPlayerInventory.extra.0": "You also need client side mod for it to work on creative inventory"
 }
